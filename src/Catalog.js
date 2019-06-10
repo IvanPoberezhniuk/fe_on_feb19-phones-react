@@ -1,34 +1,33 @@
-import React from 'react';
+import React from "react";
 
-const Catalog = (props) => {
+const Catalog = props => {
   return (
     <ul className="phones">
-
-      { props.phones.map(phone => (
-        <li className="thumbnail" key={phone.id} >
+      {props.phones.map(phone => (
+        <li className="thumbnail" key={phone.id}>
           <a
-            href={'#' + phone.id}
+            href={"#" + phone.id}
             className="thumb"
             onClick={() => {
-              props.onPhoneSelected(phone.id)
+              props.onPhoneSelected(phone.id);
             }}
           >
-            <img
-              alt={phone.name}
-              src={phone.imageUrl}
-            />
+            <img alt={phone.name} src={phone.imageUrl} />
           </a>
-
           <div className="phones__btn-buy-wrapper">
-            <a className="btn btn-success">
+            <a
+              href="'#' + phone.id"
+              className="btn btn-success"
+              onClick={() => props.addToCart(phone.name, phone.id)}
+            >
               Add
             </a>
           </div>
 
           <a
-            href={'#' + phone.id}
+            href={"#" + phone.id}
             onClick={() => {
-              props.onPhoneSelected(phone.id)
+              props.onPhoneSelected(phone.id);
             }}
           >
             {phone.name}
@@ -36,7 +35,7 @@ const Catalog = (props) => {
 
           <p>{phone.snippet}</p>
         </li>
-      )) }
+      ))}
     </ul>
   );
 };

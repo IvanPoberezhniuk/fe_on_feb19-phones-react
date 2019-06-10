@@ -1,23 +1,35 @@
-import React from 'react';
+import React from "react";
 
-import { getAll, getById } from './api/phone'
-import Basket from './Basket'
-import Filter from './Filter'
-import Catalog from './Catalog'
+import { getAll, getById } from "./api/phone";
+import Basket from "./Basket";
+import Filter from "./Filter";
+import Catalog from "./Catalog";
 
-import './App.css';
-
+import "./App.css";
+// import { isTerminatorless } from "@babel/types";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    phones: getAll(),
+    selectedPhone: null,
+    basketItems: []
+  };
 
-    this.state = {
-      phones: getAll(),
-      selectedPhone: null,
-      basketItems: [],
-    };
-  }
+  addToCart = (name, id, count) => {
+    let basketItems = this.state.basketItems;
+
+    this.setState({
+      basketItems: [...basketItems, { name, id }]
+    });
+  };
+
+  removeFromCart = name => {
+    this.setState({
+      basketItems: this.state.basketItems.filter(item =>
+        item.name !== name ? item : false
+      )
+    });
+  };
 
   render() {
     return (
@@ -26,29 +38,33 @@ class App extends React.Component {
           <div className="row">
             <div className="col-md-2">
               <Filter />
-              <Basket />
+              <Basket
+                basketItems={this.state.basketItems}
+                removeFromCart={this.removeFromCart}
+              />
             </div>
-
             <div className="col-md-10">
-              { this.state.selectedPhone ? (
+              {this.state.selectedPhone ? (
                 <Viewer
+                  addToCart={this.addToCart}
                   phone={this.state.selectedPhone}
                   onBack={() => {
                     this.setState({
-                      selectedPhone: null,
+                      selectedPhone: null
                     });
                   }}
                 />
               ) : (
                 <Catalog
+                  addToCart={this.addToCart}
                   phones={this.state.phones}
-                  onPhoneSelected={(phoneId) => {
+                  onPhoneSelected={phoneId => {
                     this.setState({
-                      selectedPhone: getById(phoneId),
+                      selectedPhone: getById(phoneId)
                     });
                   }}
                 />
-              ) }
+              )}
             </div>
           </div>
         </div>
@@ -57,23 +73,49 @@ class App extends React.Component {
   }
 }
 
-const Viewer = (props) => (
-  <div>
-    <img className="phone" src={props.phone.images[0]}/>
-    <button onClick={props.onBack}>Back</button>
-    <button>Add to basket</button>
+class Viewer extends React.Component {
+  state = {
+    id: 0
+  };
 
-    <h1>{props.phone.name}</h1>
-    <p>{props.phone.description}</p>
+  handleClick = elem => {
+    this.setState({
+      id: elem.target.id
+      // mainImg: this.props.phone.images[elem.target.id]
+    });
+  };
 
-    <ul className="phone-thumbs">
-      { props.phone.images.map(imageUrl => (
-        <li>
-          <img src={imageUrl}/>
-        </li>
-      )) }
-    </ul>
-  </div>
-);
+  render() {
+    return (
+      <div>
+        <img
+          alt=""
+          className="phone"
+          src={this.props.phone.images[this.state.id]}
+        />
+        <button onClick={this.props.onBack}>Back</button>
+        <button onClick={() => this.props.addToCart(this.props.phone.name)}>
+          Add to basket
+        </button>
+
+        <h1>{this.props.phone.name}</h1>
+        <p>{this.props.phone.description}</p>
+
+        <ul className="phone-thumbs">
+          {this.props.phone.images.map(imageUrl => (
+            <li>
+              <img
+                id={this.props.phone.images.indexOf(imageUrl)}
+                alt=""
+                src={imageUrl}
+                onClick={this.handleClick}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default App;
