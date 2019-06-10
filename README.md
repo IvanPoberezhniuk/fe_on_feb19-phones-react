@@ -1,3 +1,8 @@
+- [Preview](https://mag1ckdrak0n.github.io/first_landing/build)
+
+- [PullRequest](https://github.com/mgrinko/fe_on_feb19-phones-react/pull/11/files)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
