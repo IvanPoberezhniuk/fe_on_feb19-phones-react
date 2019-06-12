@@ -18,7 +18,7 @@ const Catalog = props => {
             <a
               href="'#' + phone.id"
               className="btn btn-success"
-              onClick={() => props.addToCart(phone.name, phone.id)}
+              onClick={() => props.addToCart(phone.name)}
             >
               Add
             </a>

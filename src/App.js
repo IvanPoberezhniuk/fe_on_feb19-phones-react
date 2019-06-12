@@ -15,12 +15,10 @@ class App extends React.Component {
     basketItems: []
   };
 
-  addToCart = (name, id, count) => {
-    let basketItems = this.state.basketItems;
-
-    this.setState({
-      basketItems: [...basketItems, { name, id }]
-    });
+  addToCart = (name, id) => {
+    this.setState(prevState => ({
+      basketItems: [...prevState.basketItems, { name, id }]
+    }));
   };
 
   removeFromCart = name => {
