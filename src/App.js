@@ -79,7 +79,6 @@ class Viewer extends React.Component {
   handleClick = elem => {
     this.setState({
       id: elem.target.id
-      // mainImg: this.props.phone.images[elem.target.id]
     });
   };
 

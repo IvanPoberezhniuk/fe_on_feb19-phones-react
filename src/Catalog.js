@@ -6,7 +6,7 @@ const Catalog = props => {
       {props.phones.map(phone => (
         <li className="thumbnail" key={phone.id}>
           <a
-            href={"#" + phone.id}
+            href={"#"}
             className="thumb"
             onClick={() => {
               props.onPhoneSelected(phone.id);
@@ -16,7 +16,7 @@ const Catalog = props => {
           </a>
           <div className="phones__btn-buy-wrapper">
             <a
-              href="'#' + phone.id"
+              href={"#"}
               className="btn btn-success"
               onClick={() => props.addToCart(phone.name)}
             >
@@ -25,7 +25,7 @@ const Catalog = props => {
           </div>
 
           <a
-            href={"#" + phone.id}
+            href='#'
             onClick={() => {
               props.onPhoneSelected(phone.id);
             }}
