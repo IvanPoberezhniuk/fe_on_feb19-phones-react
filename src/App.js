@@ -24,7 +24,7 @@ class App extends React.Component {
   removeFromCart = name => {
     this.setState({
       basketItems: this.state.basketItems.filter(item =>
-        item.name !== name ? item : false
+        item.name !== name ? true : false
       )
     });
   };
