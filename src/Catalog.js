@@ -1,33 +1,33 @@
 import React from "react";
 
 const Catalog = props => {
+  const { addToCart, phones, onPhoneSelected } = props;
+
   return (
     <ul className="phones">
-      {props.phones.map(phone => (
+      {phones.map(phone => (
         <li className="thumbnail" key={phone.id}>
           <a
-            href={"#"}
+            href={event => event.preventDefault()}
             className="thumb"
-            onClick={() => {
-              props.onPhoneSelected(phone.id);
-            }}
+            onClick={() => onPhoneSelected(phone.id)}
           >
             <img alt={phone.name} src={phone.imageUrl} />
           </a>
           <div className="phones__btn-buy-wrapper">
             <a
-              href={"#"}
+              href={event => event.preventDefault()}
               className="btn btn-success"
-              onClick={() => props.addToCart(phone.name)}
+              onClick={() => addToCart(phone)}
             >
               Add
             </a>
           </div>
 
           <a
-            href='#'
+            href="event => event.preventDefault()"
             onClick={() => {
-              props.onPhoneSelected(phone.id);
+              onPhoneSelected(phone.id);
             }}
           >
             {phone.name}

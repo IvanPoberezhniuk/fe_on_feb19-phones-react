@@ -1,33 +1,25 @@
 import React from "react";
 
-class Basket extends React.Component {
-  renderLi = (name, id, count = "") => {
+const randomstring = require("randomstring");
+
+const Basket = props => {
+  const { basketItems, removeFromCart } = props;
+
+  const renderLi = phone => {
     return (
-      <li key={id}>
-        {name} {count}
-        <button
-          onClick={() => {
-            this.props.removeFromCart(name);
-          }}
-        >
-          x
-        </button>
+      <li key={randomstring.generate(5)}>
+        {phone.name}: {phone.count + " "}
+        <button onClick={() => removeFromCart(phone)}>x</button>
       </li>
     );
   };
 
-  render() {
-    return (
-      <section>
-        <p>Shopping Cart</p>
-        <ul>
-          {this.props.basketItems.map(item =>
-            this.renderLi(item.name, item.id)
-          )}
-        </ul>
-      </section>
-    );
-  }
-}
+  return (
+    <section>
+      <p>Shopping Cart</p>
+      <ul>{basketItems.map(phone => renderLi(phone))}</ul>
+    </section>
+  );
+};
 
 export default Basket;

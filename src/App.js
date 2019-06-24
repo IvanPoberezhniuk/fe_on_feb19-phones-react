@@ -1,12 +1,9 @@
 import React from "react";
-
 import { getAll, getById } from "./api/phone";
 import Basket from "./Basket";
 import Filter from "./Filter";
 import Catalog from "./Catalog";
-
 import "./App.css";
-// import { isTerminatorless } from "@babel/types";
 
 class App extends React.Component {
   state = {
@@ -15,18 +12,57 @@ class App extends React.Component {
     basketItems: []
   };
 
-  addToCart = (name, id) => {
-    this.setState(prevState => ({
-      basketItems: [...prevState.basketItems, { name, id }]
-    }));
+  addToCart = phone => {
+    let isInBasket = this.state.basketItems.find(
+      phoneInBasket => phoneInBasket.id === phone.id
+    );
+
+    if (isInBasket) {
+      this.setState(prevState => ({
+        basketItems: prevState.basketItems.map(phoneInBasket => {
+          if (phoneInBasket.id === phone.id) {
+            phoneInBasket.count++;
+            return phoneInBasket;
+          } else {
+            return phoneInBasket;
+          }
+        })
+      }));
+    } else {
+      this.setState(prevState => ({
+        basketItems: [
+          ...prevState.basketItems,
+          { name: phone.name, id: phone.id, count: 1 }
+        ]
+      }));
+    }
   };
 
-  removeFromCart = name => {
-    this.setState({
-      basketItems: this.state.basketItems.filter(item =>
-        item.name !== name ? true : false
-      )
-    });
+  removeFromCart = phone => {
+    let index = this.state.basketItems.findIndex(
+      phoneInBasket => phoneInBasket.id === phone.id
+    );
+
+    if (phone.count > 1) {
+      this.setState(prevState => ({
+        basketItems: prevState.basketItems.map(phoneInBasket => {
+          if (phoneInBasket.id === phone.id) {
+            phoneInBasket.count--;
+            return phoneInBasket;
+          } else {
+            return phoneInBasket;
+          }
+        })
+      }));
+    } else {
+      this.setState(prevState => {
+        prevState.basketItems.splice(index, 1);
+
+        return {
+          returnbasketItems: prevState.basketItems
+        };
+      });
+    }
   };
 
   render() {
@@ -91,7 +127,11 @@ class Viewer extends React.Component {
           src={this.props.phone.images[this.state.id]}
         />
         <button onClick={this.props.onBack}>Back</button>
-        <button onClick={() => this.props.addToCart(this.props.phone.name)}>
+        <button
+          onClick={() =>
+            this.props.addToCart(this.props.phone.name, this.props.phone.id)
+          }
+        >
           Add to basket
         </button>
 
