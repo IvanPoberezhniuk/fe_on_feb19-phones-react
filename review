@@ -1,0 +1,17 @@
+css: не стилізуй теги для цього є class
+
+Ти забув про ізнування let і пхаєш його там де треба і там де має бути const
+
+Неможна модифікувати дані з state напряму навіть в середині setState: https://github.com/mag1ckdrak0n/fe_on_feb19-phones-react/blob/develop/src/App.js#L24
+
+Відсутні key при рендері ліста
+https://github.com/mag1ckdrak0n/fe_on_feb19-phones-react/blob/develop/src/App.js#L24
+
+ можна використати id 
+ https://github.com/mag1ckdrak0n/fe_on_feb19-phones-react/blob/develop/src/App.js#L24
+ 
+ Чому не зробити return після провірки?
+ https://github.com/mag1ckdrak0n/fe_on_feb19-phones-react/blob/develop/src/App.js#L51
+ 
+Часто використовуює a замість button
+https://github.com/mag1ckdrak0n/fe_on_feb19-phones-react/blob/develop/src/Catalog.js#L18
