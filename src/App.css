@@ -54,7 +54,6 @@ img.phone:first-child {
   display: block;
 }
 
-
 ul.phone-thumbs {
   margin: 0;
   list-style: none;
@@ -77,7 +76,6 @@ ul.phone-thumbs img:hover {
   cursor: pointer;
 }
 
-
 ul.specs {
   clear: both;
   margin: 0;
@@ -85,13 +83,13 @@ ul.specs {
   list-style: none;
 }
 
-ul.specs > li{
+ul.specs > li {
   display: inline-block;
   width: 200px;
   vertical-align: top;
 }
 
-ul.specs > li > span{
+ul.specs > li > span {
   font-weight: bold;
   font-size: 1.2em;
 }

@@ -48,10 +48,8 @@ class App extends React.Component {
         basketItems: prevState.basketItems.map(phoneInBasket => {
           if (phoneInBasket.id === phone.id) {
             phoneInBasket.count--;
-            return phoneInBasket;
-          } else {
-            return phoneInBasket;
           }
+          return phoneInBasket;
         })
       }));
     } else {

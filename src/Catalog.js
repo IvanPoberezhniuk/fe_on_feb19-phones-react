@@ -8,20 +8,21 @@ const Catalog = props => {
       {phones.map(phone => (
         <li className="thumbnail" key={phone.id}>
           <a
-            href={event => event.preventDefault()}
+            href="#"
             className="thumb"
-            onClick={() => onPhoneSelected(phone.id)}
+            onClick={event => event.preventDefault()}
+            onClick={() => onPhoneSelected(phone.id + "cart")}
           >
             <img alt={phone.name} src={phone.imageUrl} />
           </a>
           <div className="phones__btn-buy-wrapper">
-            <a
+            <button
               href={event => event.preventDefault()}
               className="btn btn-success"
               onClick={() => addToCart(phone)}
             >
               Add
-            </a>
+            </button>
           </div>
 
           <a

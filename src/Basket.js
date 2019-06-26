@@ -7,7 +7,7 @@ const Basket = props => {
 
   const renderLi = phone => {
     return (
-      <li key={randomstring.generate(5)}>
+      <li key={phone.id}>
         {phone.name}: {phone.count + " "}
         <button onClick={() => removeFromCart(phone)}>x</button>
       </li>
